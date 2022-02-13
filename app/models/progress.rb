@@ -12,4 +12,6 @@ class Progress < ApplicationRecord
     end
     self.sequence = next_sequence
   end
+
+  # validates :answer, presence: true
 end
