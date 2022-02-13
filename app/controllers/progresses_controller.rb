@@ -16,7 +16,8 @@ class ProgressesController < ApplicationController
       current_game.status = "finished"
       current_game.result = "incorrect"
       current_game.save!
-      
+
+      @extract_comics = ExtractionAlgorithm.new(current_game).compute
       redirect_to give_up_game_path(current_game)
       return
     end
