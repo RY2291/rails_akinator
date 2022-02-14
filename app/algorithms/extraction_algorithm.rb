@@ -23,6 +23,7 @@ class ExtractionAlgorithm
       Rails.logger.debug("On the way query is" + @query.to_sql.to_s)
       Rails.logger.debug("On the way comics are" + @query.pluck(:title).to_a.to_s)
     end
+    pp "-----#{@query.pluck(:title).to_a.to_s}----"
     @query
   end
 
