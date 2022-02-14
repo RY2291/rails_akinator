@@ -18,6 +18,8 @@ class ExtractionAlgorithm
           serialization_end?(progress)
         when "genre_match"
           genre_match?(progress)
+        when "publisher_match"
+          publisher_match?(progress)
         else
           raise Exception("invalid algorithm.-->" + question.algorithm.to_s)
       end
@@ -50,4 +52,16 @@ class ExtractionAlgorithm
       @query = @query.where.not("comics.genre like ?", "%#{progress.question.eval_value}%")
     end
   end
+
+  def publisher_match?(progress)
+    if progress.positive_answer?
+      @query = @query.where("comics.publisher like ?", "%#{progress.question.eval_value}%")
+    end
+    
+    if progress.negative_answer?
+      @query = @query.where.not("comics.publisher like ?", "%#{progress.question.eval_value}%")
+    end
+  end
+
+  
 end
